@@ -13,14 +13,6 @@ import shutil
 import smtplib
 from gmail_api_helpers import *
 
-"""
-最新物件ファイルを生成・更新する
-
-1. update timestamp in another file
-2. add new rooms
-3. delete too old rooms that are no more posted.
-"""
-
 def get_latest_fetch_date(output_name):
     files = glob.glob("./data/{}*.csv".format(output_name))
     latest_fetch_date = datetime.datetime.strptime('20200101', '%Y%m%d')
@@ -102,9 +94,9 @@ def get_desired_rooms(df):
     return df[d_age * d_floor * d_money]
 
 
-def send_email(df, subject, message_text):
+def send_email(df, fname, subject, message_text):
     # create a csv file of new rooms list
-    df.to_csv('./tmp/rooms.csv', sep = ',',encoding='utf-8')
+    df.to_csv(fname, sep = ',',encoding='utf-8', columns = ['nearest1', 'walk1', 'age', 'area', 'commute', 'link'])
 
     # authorize gmail api
     service = authorize()
@@ -112,7 +104,7 @@ def send_email(df, subject, message_text):
     # create message
     sender = "automf03@gmail.com"
     to = "trivalworks@gmail.com"
-    filepath = "./tmp/rooms.csv"
+    filepath = fname
     message = create_message_with_attachment(sender, to, subject, message_text, filepath)
 
     # send message

@@ -33,9 +33,9 @@ if __name__ == '__main__':
     if len(new_df) > 0:
         #new_df = get_desired_rooms(new_df)
         contents = "test"
-        send_email(new_df, "新着 {}件 @{}".format(len(new_df), mail_date), contents)
+        send_email(new_df, './tmp/new_rooms.csv', "新着 {}件 @{}".format(len(new_df), mail_date), contents)
     if len(done_df) > 0:
         #done_df = get_desired_rooms(done_df)
         contents = "test"
-        send_email(done_df, "掲載終了 {}件 @{}".format(len(done_df), mail_date), contents)
+        send_email(done_df, './tmp/done_rooms.csv', "掲載終了 {}件 @{}".format(len(done_df), mail_date), contents)
     
