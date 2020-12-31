@@ -1,4 +1,16 @@
 # ここに検索条件を書いて、読み込みながらスクリプトを実行する
-# 千葉県 六本木一丁目駅 80分まで 8万まで 鉄筋、2階以上、コンロ2口以上、定期借家なし
-output_name=chiba_r_80m_80000
-url=https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&ta=12&bs=040&ekInput=41570&tj=80&nk=-1&ct=8.0&cb=0.0&co=1&kz=1&et=20&mt=9999999&mb=20&cn=9999999&tc=0400101&tc=0400203&tc=0401106&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&pc=30
+# 千葉 六本木一丁目駅 80分まで 3~7.5万 駅徒歩20分以内 20~40m^2 鉄筋 2階以上 コンロ2口以上 定期借家なし
+output_name=chiba_r_80m_75000
+url=https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&ta=12&bs=040&ekInput=41570&tj=80&nk=-1&ct=7.5&cb=3.0&co=1&kz=1&et=20&mt=40&mb=20&cn=9999999&tc=0400101&tc=0400203&tc=0401106&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&pc=30
+
+# 埼玉 六本木一丁目駅 80分まで 3~7.5万 駅徒歩20分以内 20~40m^2 鉄筋 2階以上 コンロ2口以上 定期借家なし
+output_name=saitama_r_80m_75000
+url=https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&ta=11&bs=040&ekInput=41570&tj=80&nk=-1&ct=7.5&cb=3.0&co=1&kz=1&et=20&mt=40&mb=20&cn=9999999&tc=0400101&tc=0400203&tc=0401106&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&pc=30
+
+# 東京 六本木一丁目駅 80分まで 3~7.5万 駅徒歩20分以内 20~40m^2 鉄筋 2階以上 コンロ2口以上 定期借家なし
+output_name=tokyo_r_80m_75000
+url=https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&ta=13&bs=040&ekInput=41570&tj=80&nk=-1&ct=7.5&cb=3.0&co=1&kz=1&et=20&mt=40&mb=20&cn=9999999&tc=0400101&tc=0400203&tc=0401106&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&pc=30
+
+# 神奈川 六本木一丁目駅 80分まで 3~7.5万 駅徒歩20分以内 20~40m^2 鉄筋 2階以上 コンロ2口以上 定期借家なし
+output_name=kanagawa_r_80m_75000
+url=https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&ta=14&bs=040&ekInput=41570&tj=80&nk=-1&ct=7.5&cb=3.0&co=1&kz=1&et=20&mt=40&mb=20&cn=9999999&tc=0400101&tc=0400203&tc=0401106&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&pc=30
