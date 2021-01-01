@@ -97,6 +97,9 @@ def get_data_from_link(link_series):
         availables[i] = available
         totals[i] = total
 
+        time.sleep(1)
+        
+
     directions = Series(directions)
     room_ids = Series(room_ids)
     availables = Series(availables)
@@ -120,7 +123,7 @@ if __name__ == '__main__':
 
     
     for i in range(len(url_list)):
-        output_name = "./data/" + output_name_list[i] + "_{}{}{}.csv".format(ima.year, ima.month, ima.day)
+        output_name = "./data/" + output_name_list[i] + "_{}.csv".format(ima.strftime("%Y%m%d"))
         url = url_list[i]
         
         #データ取得
@@ -250,8 +253,8 @@ if __name__ == '__main__':
                     area.append(get_num(_area.split('m')[0]))
                     detail_link.append(_detail_link)
                     
-            #プログラムを10秒間停止する（スクレイピングマナー）
-            time.sleep(10)
+            #プログラムを2秒間停止する（スクレイピングマナー）
+            time.sleep(2)
 
         #各リストをシリーズ化
         name = Series(name)
@@ -288,3 +291,6 @@ if __name__ == '__main__':
 
         #csvファイルとして保存
         suumo_df.to_csv(output_name, sep = ',',encoding='utf-8')
+
+        #print
+        print("Created a csv file")
