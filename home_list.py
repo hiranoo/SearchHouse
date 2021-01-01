@@ -68,6 +68,43 @@ def get_walk(location):
     else:
         return 99
 
+def get_data_from_link(link_series):
+    num = len(link_series)
+    directions = ['']*num
+    room_ids = ['']*num
+    availables = ['']*num
+    totals = ['']*num
+
+    for i, detail_url in enumerate(link_series):
+        #物件詳細画面を切り出し
+        result = requests.get(detail_url)
+        c = result.content
+        soup = BeautifulSoup(c)
+        # 方角
+        view_table = soup.find("table", {'class':'property_view_table'})
+        direction = get_value((view_table.find_all("tr")[4]).find_all("td")[0])
+
+        # 取扱店舗物件コード、入居可能時期、総戸数
+        abstract_table = soup.find("table", {'class':'data_table table_gaiyou'})
+        elements = abstract_table.find_all("tr")
+        room_id = get_value(elements[4].find_all("td")[1])
+        available = get_value(elements[3].find_all("td")[0])
+        total = get_value(elements[5].find_all("td")[1])
+        total = int(total.split('戸')[0]) if '戸' in total else -1
+
+        directions[i] = direction
+        room_ids[i] = room_id
+        availables[i] = available
+        totals[i] = total
+
+    directions = Series(directions)
+    room_ids = Series(room_ids)
+    availables = Series(availables)
+    totals = Series(totals)
+
+    return (directions, room_ids, availables, totals)
+
+
 if __name__ == '__main__':
     # url list を読み込む
     output_name_list = []
@@ -238,12 +275,16 @@ if __name__ == '__main__':
         floor_plan = Series(floor_plan)
         area = Series(area)
         detail_link = Series(detail_link)
+        direction, room_id, available_date, total_rooms = get_data_from_link(detail_link)
 
         #各シリーズをデータフレーム化
-        suumo_df = pd.concat([name, address, location0, location_walk0, location1, location_walk1, location2, location_walk2, age, height, commute_station, commute_time, commute_change_num, floor, rent, admin, shikikin, reikin, floor_plan, area, detail_link], axis=1)
+        suumo_df = pd.concat([name, address, location0, location_walk0, location1, location_walk1, location2, location_walk2, age, height, commute_station, commute_time, commute_change_num, floor, rent, admin, shikikin, reikin, floor_plan, area, detail_link, direction, room_id, available_date, total_rooms], axis=1)
 
         #カラム名
-        suumo_df.columns=['building_name','address','nearest1', 'walk1', 'nearest2', 'walk2', 'nearest3', 'walk3', 'age','height', 'office', 'commute', 'change', 'floor','rent','admin', 'deposit', 'reward','room_plan','area', 'link']
+        suumo_df.columns=['building_name','address','nearest1', 'walk1', 'nearest2', 'walk2', 'nearest3', 'walk3', 'age','height', 'office', 'commute', 'change', 'floor','rent','admin', 'deposit', 'reward','room_plan','area', 'link', 'direction', 'room_id', 'available_date', 'total_rooms']
+
+        #取扱店舗物件コードが重複する行を削除（suumoでは別物件として記載されているが実際は同一物件だから）
+        suumo_df.drop_duplicates(subset=['room_id', 'address', 'age', 'height', 'floor', 'area'],inplace=True)
 
         #csvファイルとして保存
         suumo_df.to_csv(output_name, sep = ',',encoding='utf-8')
