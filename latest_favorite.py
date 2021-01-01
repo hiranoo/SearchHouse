@@ -21,14 +21,16 @@ def get_favorite_rooms(df):
     #,building_name,address,nearest1,walk,nearest2,walk2,nearest3,walk,age,height,office,commute,change,
     #floor,rent,admin,deposit,reward,room_plan,area,link
     # 
-    d_age = df['age'] <= 10
+    d_age_t = df['age'] <= 10
+    d_age_b = df['age'] > 0
     d_walk1 = df['walk1'] <= 12
     d_floor = df['height'] > df['floor']
     d_money = (df['rent'] + df['admin']) <= 70000
     d_change = df['change'] <= 3
     d_area = df['area'] >= 23
+    d_nearest1 = '舎人ライナー' in df['nearest1'] 
 
-    return df[d_age*d_walk1*d_floor*d_money*d_change*d_area]
+    return df[d_age_t*d_age_b*d_walk1*d_floor*d_money*d_change*d_area*d_nearest1]
 
 def get_latest_dfs(filepath):
     files = glob.glob("./latest/*.csv")
