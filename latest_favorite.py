@@ -21,7 +21,7 @@ def get_favorite_rooms(df):
     #,building_name,address,nearest1,walk,nearest2,walk2,nearest3,walk,age,height,office,commute,change,
     #floor,rent,admin,deposit,reward,room_plan,area,link
     # 
-    d_age_t = df['age'] <= 10
+    d_age_t = df['age'] <= 20
     d_age_b = df['age'] > 0
     d_walk1 = df['walk1'] <= 12
     d_floor = df['height'] > df['floor']
@@ -29,8 +29,10 @@ def get_favorite_rooms(df):
     d_change = df['change'] <= 3
     d_area = df['area'] >= 23
     d_nearest1 = '舎人ライナー' in df['nearest1'] 
+    d_direction_negative = df['direction'].str.contains('-|北|西')
+    d_available = df['available_date'].str.contains('即|1月|2月')
 
-    return df[d_age_t*d_age_b*d_walk1*d_floor*d_money*d_change*d_area*d_nearest1]
+    return df[d_age_t*d_age_b*d_walk1*d_floor*d_money*d_change*d_area*d_nearest1*d_direction_negative*d_available]
 
 def get_latest_dfs(filepath):
     files = glob.glob("./latest/*.csv")
@@ -52,6 +54,6 @@ if __name__ == '__main__':
     df = get_latest_dfs(file_path)
 
     subject = "最新物件リスト"
-    message_text = "test"
+    message_text = ""
     send_email(df, file_path, subject, message_text)
     
