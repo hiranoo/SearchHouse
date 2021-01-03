@@ -1,6 +1,7 @@
 # Before executing
-Rewrite BASE_PATH in modules/base_path.py depending on your environment
-Enable PYTHONPATH of modules/*
+1. rewrite BASE_PATH in modules/base_path.py depending on your environment
+
+2. enable PYTHONPATH: modules/*
 
 # Flow
 1. fetch data from suumo -- ./data/fetched/*_date.csv
