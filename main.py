@@ -17,6 +17,7 @@ from update_data import *
 from select_data import *
 from send_data import *
 from base_path import *
+from init import *
 
 """
 1. fetch data from suumo -- ./data/*_date.csv
@@ -38,17 +39,22 @@ def get_fetch_needs():
     return needs
 
 
-columns = ['near1', 'walk1', 'commute', 'age', 'area', 'detail_room_plan', 'direction', 'available_date', 'monthly', 'link']
-
-do_fetch = get_fetch_needs()
-if do_fetch:
-    fetch_basic_data()
-
-# ./data/fetched --> ./data/latest
-update_data()
-
-# ./data/latest --> ./data/selected
-select_and_save_data()
-
-# ./data/selected --> ./data/sending
-send_data('all', columns) # arg0: 'all' or 'new', arg1: columns to show
+if __name__ == '__main__':
+    columns = ['near1', 'walk1', 'commute', 'age', 'area', 'detail_room_plan', 'direction', 'available_date', 'monthly', 'link']
+    
+    # Create data directiories if unexist
+    init()
+   
+    # suumo --> ./data/fetched
+    do_fetch = get_fetch_needs()
+    if do_fetch:
+        fetch_basic_data()
+    
+    # ./data/fetched --> ./data/latest
+    update_data()
+    
+    # ./data/latest --> ./data/selected
+    select_and_save_data()
+    
+    # ./data/selected --> ./data/sending
+    send_data('all', columns) # arg0: 'all' or 'new', arg1: columns to show

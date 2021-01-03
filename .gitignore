@@ -1,3 +1,4 @@
 *.csv
 timestamp/*
 .*.swp
+*/__pychache__/*
