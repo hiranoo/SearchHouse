@@ -1,7 +1,9 @@
-# Description
-1. home_list.py: to fetch data from suumo
+# Flow
+1. fetch data from suumo -- ./data/fetched/*_date.csv
+2. update data to be latest -- ./data/latest/*.csv
+3. select some data from latest data -- not csv, just a DataFrame
+4. add data to the selected data, refering detail link -- DataFrame
+5. select favorite data from 4's data -- ./data/selected/selected.csv
+6. send favorite data (choose all or new) -- ./data/sending/*.csv
 
-2. update_latest_data.py: to update latest data and, squeeze and send new data
-
-3. latest_favorite.py: to squeeze my favorite data as ./favorite_rooms.csv
 
