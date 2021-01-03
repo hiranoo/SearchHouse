@@ -9,6 +9,11 @@
 1. if you don't need all data, you can select data not included in the previously selected data:
 
    rewrite 'all' as 'new' in main.py
+   
+## To change searching conditions
+1. change url in url_list.txt
+1. change filter functions in select_data.py
+1. change columns in main.py 
 
 # Flow
 1. fetch data from suumo -- ./data/fetched/*_date.csv
