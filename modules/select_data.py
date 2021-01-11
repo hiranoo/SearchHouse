@@ -1,16 +1,19 @@
 # coding: utf-8
 
-import datetime
-import glob
-import os
-import shutil
-
 import pandas as pd
 from pandas import DataFrame, Series
 from fetch_data import *
-from process_data import *
 from base_path import *
 
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+import datetime
+import time
+import re
+import sys, os
+import glob
+import shutil
 
 def _get_data_from_link(link_series):
     num = len(link_series)
