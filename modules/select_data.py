@@ -27,15 +27,18 @@ def _get_data_from_link(link_series):
 
     for i, detail_url in enumerate(link_series):
         soup = create_html_object(detail_url)
-        view_elements = soup.find("table", {'class':'property_view_table'}).find_all("tr")
-        abstract_elements = soup.find("table", {'class':'data_table table_gaiyou'}).find_all("tr")
+        try:
+            view_elements = soup.find("table", {'class':'property_view_table'}).find_all("tr")
+            abstract_elements = soup.find("table", {'class':'data_table table_gaiyou'}).find_all("tr")
 
-        directions[i] = get_value(view_elements[4].find_all("td")[0])
-        room_ids[i] = get_value(abstract_elements[4].find_all("td")[1])
-        availables[i] = get_value(abstract_elements[3].find_all("td")[0])
-        total = get_value(abstract_elements[5].find_all("td")[1])
-        totals[i] = int(total.split('戸')[0]) if '戸' in total else -1
-        detail_room_plans[i] = get_value(abstract_elements[0].find_all("td")[0])
+            directions[i] = get_value(view_elements[4].find_all("td")[0])
+            room_ids[i] = get_value(abstract_elements[4].find_all("td")[1])
+            availables[i] = get_value(abstract_elements[3].find_all("td")[0])
+            total = get_value(abstract_elements[5].find_all("td")[1])
+            totals[i] = int(total.split('戸')[0]) if '戸' in total else -1
+            detail_room_plans[i] = get_value(abstract_elements[0].find_all("td")[0])
+        except Exception as e:
+            print(detail_url)         
 
     directions = Series(directions)
     room_ids = Series(room_ids)
