@@ -1,9 +1,17 @@
 # coding: utf-8
 
 from bs4 import BeautifulSoup
+import requests
 import pandas as pd
 from pandas import Series, DataFrame
-
+import datetime
+import time
+import re
+import sys, os
+import glob
+import shutil
+from gmail_api_helpers import *
+from process_data import *
 
 # BeautifulSoup object からhtmlタグなしの値を取り出す
 def get_value(obj):
